@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Banoty🥺🫀💋</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: 'Cairo', sans-serif;
+      background: #fce4ec;
+    }
+
+    /* فيديو ملء الشاشة */
+    #fullscreen-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 999;
+      display: none;
+    }
+
+    #start-btn {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #ad1457;
+      color: white;
+      border: none;
+      padding: 16px 32px;
+      font-size: 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    #main-content {
+      display: none;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 30px;
+    }
+
+    .container {
+      background: #fff;
+      max-width: 600px;
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 12px 25px rgba(106, 27, 77, 0.3);
+      padding: 40px 35px 60px 35px;
+      position: relative;
+      text-align: center;
+      color: #6a1b4d;
+    }
+
+    .heart {
+      font-size: 36px;
+      color: #d81b60;
+      animation: beat 1.2s infinite;
+      user-select: none;
+    }
+
+    @keyframes beat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+
+    #content {
+      font-size: 20px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      margin: 30px 0;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+    }
+
+    .nav button {
+      background: #ad1457;
+      border: none;
+      padding: 14px 30px;
+      border-radius: 35px;
+      color: #fff;
+      font-size: 17px;
+      cursor: pointer;
+      box-shadow: 0 6px 12px rgba(173, 20, 87, 0.3);
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .nav button:hover {
+      background: #880e4f;
+      transform: scale(1.05);
+    }
+
+    /* نبدأ نخفي الأزرار */
+    .nav {
+      display: none;
+    }
+
+    .page-number {
+      margin-top: 18px;
+      color: #880e4f;
+      font-weight: 700;
+      font-size: 15px;
+      user-select: none;
+      display: none;
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- زر البداية -->
+<button id="start-btn">بحبك اووي ❤️</button>
+
+<!-- الفيديو كامل الشاشة -->
+<video id="fullscreen-video" autoplay muted playsinline>
+  <source src="https://c.top4top.io/m_3466pz9bg0.mp4" type="video/mp4" />
+  متصفحك لا يدعم تشغيل الفيديو.
+</video>
+
+<!-- محتوى الرسائل -->
+<div id="main-content">
+  <div class="container">
+    <div class="heart">❤️</div>
+    <div id="content"></div>
+    <div class="nav">
+      <button onclick="prevPage()">السابق</button>
+      <button onclick="nextPage()">التالي</button>
+    </div>
+    <div class="page-number" id="pageNumber"></div>
+  </div>
+</div>
+
+<!-- موسيقى خلفية -->
+<audio id="bg-music" loop>
+  <source src="https://i.top4top.io/m_353948dfl0.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  const pages = [
+  `حبيبتي  
+من اول لحظة شفتك فيها حسيت ان الدنيا كلها اتغيرت  
+نظرتك كانت كافية تخليني انسى العالم كله  
+ومن وقتها وانا قلبي مش لاقي راحته غير وانتي فيه`,
+
+  `كل لحظة بتمر بحمد ربنا انه رزقني بيكي  
+وجودك جنبي هو الامان اللي عمري ما عرفته قبل كده  
+كل مرة ببصلك فيها بحس اني عايش من اول وجديد  
+انتي مش بس حبيبتي انتي دنيتي كلها`,
+
+  `عارفة يعني ايه اشتقتلك  
+يعني قلبي ينادي اسمك حتى وهو ساكت  
+يعني عيوني تدور عليكي في كل وش بشوفه  
+وحضني يفضل فاضي لحد ما ترجعيلي`,
+
+  `انا مش شاعر  
+بس معاكي كل كلمة حب بتتحول لقصيدة  
+وكل لحظة بتجمعني بيكي هي اجمل حكاية  
+بطلتها دايما انتي`,
+
+  `لو الزمن يوقف كنت اتمنى يوقف وانتي بتضحكي  
+ضحكتك وصوتك وكل تفصيلة فيكي  
+بيخلوني احس اني في حلم جميل مش عايز اصحى منه  
+كل حاجة فيكي بتأكدلي انك اجمل قدر`,
+
+  `انتي عارفة ان وجودك في حياتي هو الحتة اللي دايما حلوة  
+حتى لو اليوم كله بايظ  
+انا مش محتاج سبب عشان اكلمك  
+ولا مناسبة عشان اقولك اني مبسوط بيكي  
+انتي السبب`,
+
+  `بحب ضحكتك  
+بحب طريقتك في الزعل  
+وبحب انك دايما واخدة قلبي على خوانة  
+مش هقولك وحشتيني  
+لانك اصلا عمرك ما بتخرجي من بالي علشان اشتاقلك`,
+
+  `انا لما ببص في عينيكي بحس اني فاتح واي فاي على فايف جي  
+من غير ما ادفع الاشتراك  
+عارفة لما بحس بالدوشة والزحمة  
+اول صوت منك بيعمللي ريستارت للقلب  
+ويرجعني لحالة احبك يا مجنونة`,
+
+  `انتي مش بس حبيبتي  
+انتي نسكافيه صباحي وانغام هادية في عز الزحمة  
+وبونبوناية وسط الحوارات المرة  `,
+
+  `كنت ناوي اكتبلك جواب شوق وابعتهولك علي البيت   
+بس لما بدأت اكتب القلم وقف  
+وقاللي مش قادر اكمل  
+الكلام ده كبير عليا  
+يمكن لانك اغلى من كل كلام  
+واقرب من كل حاجة  
+واكتر واحدة تستاهل تتحب من القلب`,
+
+  `بصراحة انا حبيت اعترف بحاجة خطيرة  
+انا متأكد انك ساحرة  
+مش عشان جمالك بس  
+بس عشان كل مرة بتضحكي فيها  
+بنسى انا كنت زعلان من ايه اصلا  
+ولما بتزعلي  
+بحس اني في مسلسل تركي الحلقة ٩٩  
+ومفيش ترجمة 😂
+
+`,
+
+  `
+وبعدين انتي بتعملي فيا حاجات مش طبيعية  
+بقعد ابص في صورتك وانا باكل  
+وافتكرك في نص النوم  
+واكتب اسمك في مكان كلمة السر 😂
+
+انتي مش بس حبيبتي  
+انتي اللخبطة الحلوة اللي في دماغي 
+ 😜❤️ بحبك اووي يا ياسـو`
+];
+
+  const video = document.getElementById('fullscreen-video');
+  const startBtn = document.getElementById('start-btn');
+  const mainContent = document.getElementById('main-content');
+  const contentDiv = document.getElementById("content");
+  const pageNumberDiv = document.getElementById("pageNumber");
+  const navDiv = document.querySelector('.nav');
+  const music = document.getElementById("bg-music");
+
+  let current = 0;
+
+  function renderPage() {
+    contentDiv.textContent = pages[current];
+    pageNumberDiv.textContent = `صفحة ${current + 1} من ${pages.length}`;
+  }
+
+  function nextPage() {
+    current = (current + 1) % pages.length;
+    renderPage();
+  }
+
+  function prevPage() {
+    current = (current - 1 + pages.length) % pages.length;
+    renderPage();
+  }
+
+  startBtn.onclick = () => {
+    video.muted = false;
+    video.style.display = 'block';
+    startBtn.style.display = 'none';
+    video.play();
+
+    video.onended = () => {
+      video.style.display = 'none';
+      mainContent.style.display = 'flex';
+      navDiv.style.display = 'flex';
+      pageNumberDiv.style.display = 'block';
+      music.play();
+      renderPage();
+    };
+  };
+</script>
+
+</body>
+</html>
