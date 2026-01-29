@@ -1,282 +1,312 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Banoty🥺🫀💋</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>رسالة من القلب ❤️</title>
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital@1&family=Cairo:wght@400;700&display=swap');
 
-    body, html {
-      height: 100%;
-      font-family: 'Cairo', sans-serif;
-      background: #fce4ec;
-    }
+:root{
+  --p:#ff4d6d; --s:#ad1457; --bg:#000;
+}
+*{box-sizing:border-box}
+html { scroll-behavior: smooth; }
+body,html{
+  margin:0; padding:0; background:var(--bg); color:#fff;
+  font-family:'Cairo',sans-serif; overflow-x:hidden;
+}
 
-    /* فيديو ملء الشاشة */
-    #fullscreen-video {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: 999;
-      display: none;
-    }
+.screen, .moment {
+  min-height: 100vh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; 
+  text-align: center; padding: 20px;
+}
 
-    #start-btn {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: #ad1457;
-      color: white;
-      border: none;
-      padding: 16px 32px;
-      font-size: 20px;
-      border-radius: 30px;
-      cursor: pointer;
-      z-index: 1000;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-    }
+.moment {
+  opacity:0; transform:translateY(40px); transition:1s ease;
+  min-height:50vh; padding:60px 20px;
+}
 
-    #main-content {
-      display: none;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 30px;
-    }
+h1,h2{font-family:'Amiri',serif; color:var(--p); width: 100%; text-align: center;}
 
-    .container {
-      background: #fff;
-      max-width: 600px;
-      width: 100%;
-      border-radius: 20px;
-      box-shadow: 0 12px 25px rgba(106, 27, 77, 0.3);
-      padding: 40px 35px 60px 35px;
-      position: relative;
-      text-align: center;
-      color: #6a1b4d;
-    }
+p {
+  line-height: 1.9; max-width: 680px; font-size: 1.1rem; 
+  margin: 15px auto; text-align: center; 
+}
 
-    .heart {
-      font-size: 36px;
-      color: #d81b60;
-      animation: beat 1.2s infinite;
-      user-select: none;
-    }
+.btns{
+  display:flex; flex-direction:column; gap:16px; margin: 24px auto; 
+  width: 100%; max-width: 300px;
+}
 
-    @keyframes beat {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.15); }
-    }
+button{
+  padding:14px 34px; border-radius:40px; border:none;
+  font-size:18px; font-weight:bold; cursor:pointer; transition: 0.3s;
+}
+.primary{background:var(--s); color:#fff; box-shadow:0 0 25px var(--s)}
+.ghost{background:#222; color:#fff; border:2px solid var(--p)}
+.hidden{display:none}
 
-    #content {
-      font-size: 20px;
-      line-height: 1.6;
-      white-space: pre-wrap;
-      margin: 30px 0;
-    }
+.moment.show{opacity:1; transform:none}
+.line{width:2px; height:90px; background:linear-gradient(var(--s),transparent); margin:26px auto}
 
-    .nav {
-      display: flex;
-      justify-content: center;
-      gap: 25px;
-    }
+.type-container {
+    width: 100%; max-width: 600px; margin: 20px auto; min-height: 80px;
+}
 
-    .nav button {
-      background: #ad1457;
-      border: none;
-      padding: 14px 30px;
-      border-radius: 35px;
-      color: #fff;
-      font-size: 17px;
-      cursor: pointer;
-      box-shadow: 0 6px 12px rgba(173, 20, 87, 0.3);
-      transition: background 0.3s ease, transform 0.2s ease;
-    }
+.type { font-size: 1.3rem; color: var(--p); line-height: 1.7; display: inline-block; }
 
-    .nav button:hover {
-      background: #880e4f;
-      transform: scale(1.05);
-    }
+.cursor {
+  display: inline-block; width: 3px; background-color: var(--p);
+  margin-right: 5px; animation: blink 0.8s infinite;
+}
 
-    /* نبدأ نخفي الأزرار */
-    .nav {
-      display: none;
-    }
+@keyframes blink { 50% { opacity: 0; } }
 
-    .page-number {
-      margin-top: 18px;
-      color: #880e4f;
-      font-weight: 700;
-      font-size: 15px;
-      user-select: none;
-      display: none;
-    }
+.heart{position:fixed; top:-5vh; font-size: 20px; z-index: 999; animation:fall 3s linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg); opacity:0}}
 
-    audio {
-      display: none;
-    }
-  </style>
+.counter-box{
+  margin: 30px auto; padding:25px; border-radius:18px;
+  border:1px solid var(--s); background:rgba(173,20,87,.12);
+  text-align: center; width: 95%; max-width: 450px;
+}
+#timer{ color:var(--p); font-weight:bold; font-size: 1.1rem; line-height: 1.6; direction: rtl; }
+
+video{width:92%; max-width:520px; border-radius:18px; border:2px solid var(--s); margin: 20px auto;}
+</style>
 </head>
+
 <body>
 
-<!-- زر البداية -->
-<button id="start-btn">بحبك اووي ❤️</button>
-
-<!-- الفيديو كامل الشاشة -->
-<video id="fullscreen-video" autoplay muted playsinline>
-  <source src="https://c.top4top.io/m_3466pz9bg0.mp4" type="video/mp4" />
-  متصفحك لا يدعم تشغيل الفيديو.
-</video>
-
-<!-- محتوى الرسائل -->
-<div id="main-content">
-  <div class="container">
-    <div class="heart">❤️</div>
-    <div id="content"></div>
-    <div class="nav">
-      <button onclick="prevPage()">السابق</button>
-      <button onclick="nextPage()">التالي</button>
-    </div>
-    <div class="page-number" id="pageNumber"></div>
+<div id="feelScreen" class="screen">
+  <h1>قبل ما نكمل</h1>
+  <p>قوليلي احساسك اي من ناحيتي</p>
+  <div class="btns">
+    <button class="primary" onclick="chooseFeeling('مشتاقة')">مشتاقة</button>
+    <button class="ghost" onclick="chooseFeeling('خايفة')">خايفة</button>
+    <button class="ghost" onclick="chooseFeeling('محتارة')">محتارة</button>
   </div>
 </div>
 
-<!-- موسيقى خلفية -->
-<audio id="bg-music" loop>
-  <source src="https://i.top4top.io/m_353948dfl0.mp3" type="audio/mpeg">
+<div id="story" style="display:none;">
+  <div class="moment">
+    <h2>أول سطر ليكي</h2>
+    <div class="type-container">
+        <span id="dynamicIntro" class="type"></span><span class="cursor"></span>
+    </div>
+    <div class="line"></div>
+  </div>
+
+    <div class="moment">
+    <h2>أول مرة شوفتك</h2>
+    <p>
+      يوم ما شوفتك قلبي اتخطف مكنتش اعرف انك هتكوني نصي<br>
+      بس كنت عارف ان عيوني مش عايزة تشوف غيرك<br>
+      
+      كل مره بتكلم معاكي بحس انى بهرب من تعب الدنيا<br>
+      وان صوتك هو المكان اللى بستريح فيه بحس انى لقيت نفسى فيكي<br>
+      كل تفاصيلك بتخلينى اصدق ان فيه حب حقيقى لسه موجود<br>
+      بحبك مش بس لان وجودك مريح لان انتي الامان كلو
+    </p>
+    <p>💞🏡🌍 بحبك يا ياسمين</p>
+    <div class="line"></div>
+  </div>
+
+  <div class="moment">
+    <h2>لو رجعنا لنقطة البداية</h2>
+    <p>كنتي هتعملي اي؟</p>
+    <div class="btns">
+      <button class="primary" onclick="chooseDecision('أتمسك')">أتمسك</button>
+      <button class="ghost" onclick="chooseDecision('أسكت')">أسكت</button>
+      <button class="ghost" onclick="chooseDecision('أمشي')">أمشي</button>
+    </div>
+  </div>
+
+  <div class="moment" id="decisionMoment">
+    <div class="type-container">
+        <span id="decisionText" class="type"></span><span class="cursor"></span>
+    </div>
+    <div class="line"></div>
+  </div>
+
+     <div class="moment" id="final-moment">
+    <h2>وعدي ليكي يا ياسو ❤️</h2>
+
+    <p>
+        اوعدك اني عمري ما اكون سبب وجعك
+        ولو الدنيا وجعتك اكون انا حضنك
+        ولو الناس خذلتك اكون انا ضهرك
+    </p>
+
+    <p>
+        اوعدك اني احارب الدنيا كلها عشانك
+        ولو الطريق طول امشيه زحف
+        ولو اتقفلت في وشي ابنيها من جديد
+        المهم نوصل سوا
+    </p>
+
+    <p>
+        اوعدك انك عمرك ما تحسي انك زيادة
+        ولا لحظة شك
+        ولا يوم خوف
+        لانك امان عمري كله
+    </p>
+
+    <p>
+        هنوصل يا ياسو
+        غصب عن اي حد
+        وهنكون في بيت واحد
+        ونكبر مع بعض
+        ونحكي لولادنا ازاي حبنا كان اقوى من الرفض والبعد والوجع
+        انا بحبك اكتر ما الكلام يقدر يشرح
+    </p>
+    
+    
+    
+    
+    
+      <div class="moment" id="decisionMoment">
+    <div class="type-container">
+        <span id="decisionText" class="type"></span><span class="cursor"></span>
+    </div>
+    <div class="line"></div>
+  </div>
+
+  <div class="moment">
+    <h2 style="font-size: 2.2rem;">تاريخ محفور في قلبي</h2>
+    <div class="counter-box" style="border-style: dashed; background: rgba(255, 77, 109, 0.05);">
+        <p style="font-size: 1.4rem; color: var(--p); font-weight: bold;">
+            عرفنا بعض يوم 18 / 11 / 2025
+        </p>
+        <p style="font-size: 1.2rem;">
+            كان يوم الثلاثاء.. اليوم اللي غير حياتي
+        </p>
+        <p style="font-size: 1.5rem; letter-spacing: 2px;">
+            شوفتك الساعة <span style="color: var(--p);">7:38</span> مساءً
+        </p>
+    </div>
+    <div class="line"></div>
+  </div>
+  
+    
+    
+    
+    
+    
+    
+    
+    <div class="counter-box">  
+        <div id="timer">جاري حساب الوقت...</div>  
+    </div>
+  </div>
+
+  <div class="moment">
+    <video id="myVideo" controls playsinline>
+      <source src="https://f.top4top.io/m_3681b428r0.mp4" type="video/mp4">
+    </video>
+  </div>
+</div>
+
+<audio id="bg" loop>
+  <source src="https://g.top4top.io/m_3681c2pke0.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-  const pages = [
-  `حبيبتي  
-من اول لحظة شفتك فيها حسيت ان الدنيا كلها اتغيرت  
-نظرتك كانت كافية تخليني انسى العالم كله  
-ومن وقتها وانا قلبي مش لاقي راحته غير وانتي فيه`,
+const feelMap={
+  "مشتاقة": "قولتي انك مشتاقة وعايزك تعرفي ان الشوق اللي عندي ملوش اخر وكأن قلبي مبيعرفش ينبض غير بيكي",
+  "خايفة": "قولتي خايفة اطمني يا ياسو انا موجود عشان اكون امانك وسندك وعمري ما هسيب الخوف يلمس قلبك طول ما انا جنبك",
+  "محتارة": "قولتي محتارة والحيرة بتبان لما يكون القلب فيه مشاعر كبيرة اهدي وخليكي واثقة اننا سوا هنعدي اي حيرة وأي وقت صعب"
+};
 
-  `كل لحظة بتمر بحمد ربنا انه رزقني بيكي  
-وجودك جنبي هو الامان اللي عمري ما عرفته قبل كده  
-كل مرة ببصلك فيها بحس اني عايش من اول وجديد  
-انتي مش بس حبيبتي انتي دنيتي كلها`,
 
-  `عارفة يعني ايه اشتقتلك  
-يعني قلبي ينادي اسمك حتى وهو ساكت  
-يعني عيوني تدور عليكي في كل وش بشوفه  
-وحضني يفضل فاضي لحد ما ترجعيلي`,
+const decisionMap={
+  "أتمسك": "كنت عارف انك اصيله وهتمسكي فيا ولو اخترتي نكمل ف انا هبني ليكي من قلبي احلي بيت وهفضل في ضهرك وسندك لحد اخر يوم في عمري مش هسيبك لو الدنيا كلها وقفت ضدنا",
+  "أسكت": "حتى لو سكتي انا بقيت حافظك وفاهمك و سكوتك عندي احلى من كلام الدنيا كله وكفاية عليا انك موجودة وجنبي حتى وانتي ساكتة",
+  "أمشي": "لو اخترتي تمشي ف قلبي هيفضل مفتوح ليكي دايما مش هبطل احبك ولا همل وهفضل واقف مستني رجوعك في اي وقت وهيفضل قلبي بيت ملوش مفتاح غير معاكي بحبك اوي"
+};
 
-  `انا مش شاعر  
-بس معاكي كل كلمة حب بتتحول لقصيدة  
-وكل لحظة بتجمعني بيكي هي اجمل حكاية  
-بطلتها دايما انتي`,
-
-  `لو الزمن يوقف كنت اتمنى يوقف وانتي بتضحكي  
-ضحكتك وصوتك وكل تفصيلة فيكي  
-بيخلوني احس اني في حلم جميل مش عايز اصحى منه  
-كل حاجة فيكي بتأكدلي انك اجمل قدر`,
-
-  `انتي عارفة ان وجودك في حياتي هو الحتة اللي دايما حلوة  
-حتى لو اليوم كله بايظ  
-انا مش محتاج سبب عشان اكلمك  
-ولا مناسبة عشان اقولك اني مبسوط بيكي  
-انتي السبب`,
-
-  `بحب ضحكتك  
-بحب طريقتك في الزعل  
-وبحب انك دايما واخدة قلبي على خوانة  
-مش هقولك وحشتيني  
-لانك اصلا عمرك ما بتخرجي من بالي علشان اشتاقلك`,
-
-  `انا لما ببص في عينيكي بحس اني فاتح واي فاي على فايف جي  
-من غير ما ادفع الاشتراك  
-عارفة لما بحس بالدوشة والزحمة  
-اول صوت منك بيعمللي ريستارت للقلب  
-ويرجعني لحالة احبك يا مجنونة`,
-
-  `انتي مش بس حبيبتي  
-انتي نسكافيه صباحي وانغام هادية في عز الزحمة  
-وبونبوناية وسط الحوارات المرة  `,
-
-  `كنت ناوي اكتبلك جواب شوق وابعتهولك علي البيت   
-بس لما بدأت اكتب القلم وقف  
-وقاللي مش قادر اكمل  
-الكلام ده كبير عليا  
-يمكن لانك اغلى من كل كلام  
-واقرب من كل حاجة  
-واكتر واحدة تستاهل تتحب من القلب`,
-
-  `بصراحة انا حبيت اعترف بحاجة خطيرة  
-انا متأكد انك ساحرة  
-مش عشان جمالك بس  
-بس عشان كل مرة بتضحكي فيها  
-بنسى انا كنت زعلان من ايه اصلا  
-ولما بتزعلي  
-بحس اني في مسلسل تركي الحلقة ٩٩  
-ومفيش ترجمة 😂
-
-`,
-
-  `
-وبعدين انتي بتعملي فيا حاجات مش طبيعية  
-بقعد ابص في صورتك وانا باكل  
-وافتكرك في نص النوم  
-واكتب اسمك في مكان كلمة السر 😂
-
-انتي مش بس حبيبتي  
-انتي اللخبطة الحلوة اللي في دماغي 
- 😜❤️ بحبك اووي يا ياسـو`
-];
-
-  const video = document.getElementById('fullscreen-video');
-  const startBtn = document.getElementById('start-btn');
-  const mainContent = document.getElementById('main-content');
-  const contentDiv = document.getElementById("content");
-  const pageNumberDiv = document.getElementById("pageNumber");
-  const navDiv = document.querySelector('.nav');
-  const music = document.getElementById("bg-music");
-
-  let current = 0;
-
-  function renderPage() {
-    contentDiv.textContent = pages[current];
-    pageNumberDiv.textContent = `صفحة ${current + 1} من ${pages.length}`;
+// وظيفة الكتابة حرفاً بحرف
+function typeWriter(text, elementId, speed = 50) {
+  let i = 0;
+  const element = document.getElementById(elementId);
+  element.innerHTML = ""; // مسح النص القديم
+  
+  function type() {
+    if (i < text.length) {
+      element.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(type, speed);
+    }
   }
+  type();
+}
 
-  function nextPage() {
-    current = (current + 1) % pages.length;
-    renderPage();
-  }
+function chooseFeeling(f){
+  document.getElementById('feelScreen').classList.add('hidden');
+  document.getElementById('story').style.display='block';
+  
+  // بدء الكتابة للسطر الأول
+  typeWriter(feelMap[f], "dynamicIntro");
+  
+  const audio = document.getElementById('bg');
+  audio.play().catch(e => console.log("Audio play failed"));
+  
+  startHearts(); 
+  reveal();
+  window.addEventListener('scroll', reveal);
+  startTimer();
+}
 
-  function prevPage() {
-    current = (current - 1 + pages.length) % pages.length;
-    renderPage();
-  }
+function chooseDecision(d){
+  // بدء الكتابة للقرار
+  typeWriter(decisionMap[d], "decisionText");
+  
+  setTimeout(() => {
+    document.getElementById('decisionMoment').scrollIntoView({behavior: 'smooth', block: 'center'});
+  }, 200);
+}
 
-  startBtn.onclick = () => {
-    video.muted = false;
-    video.style.display = 'block';
-    startBtn.style.display = 'none';
-    video.play();
+function reveal(){
+  document.querySelectorAll('.moment').forEach(m=>{
+    if(m.getBoundingClientRect().top < window.innerHeight-100){
+      m.classList.add('show');
+    }
+  });
+}
 
-    video.onended = () => {
-      video.style.display = 'none';
-      mainContent.style.display = 'flex';
-      navDiv.style.display = 'flex';
-      pageNumberDiv.style.display = 'block';
-      music.play();
-      renderPage();
-    };
-  };
+function startHearts(){
+  setInterval(()=>{
+    const h=document.createElement('div');
+    h.className='heart'; h.innerText='❤️';
+    h.style.left=Math.random()*100+'vw';
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),3000);
+  },450);
+}
+
+function startTimer(){
+  const start=new Date("2025-11-18T07:30:00").getTime();
+  setInterval(()=>{
+    const now = new Date().getTime();
+    const diff = now - start;
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+    document.getElementById("timer").innerHTML = `بقالنا سوا:<br>${days} يوم و ${hours} ساعة<br>${minutes} دقيقة و ${seconds} ثانية`;
+  }, 1000);
+}
+
+// التحكم في الموسيقى
+const myVid = document.getElementById('myVideo');
+const myMusic = document.getElementById('bg');
+
+myVid.onplay = () => myMusic.pause();
+myVid.onpause = () => myMusic.play();
+myVid.onended = () => myMusic.play();
 </script>
 
 </body>
